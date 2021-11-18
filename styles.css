@@ -1,0 +1,39 @@
+*, *::after, *::before {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    overflow: hidden; /*  prevents any content overflow past the body*/
+}
+
+.title {
+    z-index: 10; /* keeps the title on top of any other content */
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    inset: 0; /* shorthand for left, right, top, bottom: 0;*/
+    margin: 0;
+    flex-direction: column;
+}
+
+.subtitle {
+    margin-top: .5rem;
+}
+
+.hide {
+    display: none;;
+}
+
+.bird {
+    --bird-top: -1000; /* hides the bird before the game start*/
+    --bird-size: 60px;
+    position: absolute;
+    background-color: hsl(50, 75%, 50%); /* hue, saturation lightness*/
+    width: var(--bird-size);
+    height: var(--bird-size);
+    left: var(--bird-size);
+    top: calc(var(--bird-top) * 1px); /* converts tp pixels */
+    border-radius: 50%;
+}
