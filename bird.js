@@ -15,8 +15,13 @@ export function updateBird(delta) {
     } else {
         setTop(getTop() + BIRD_SPEED * delta) 
     }
-    setTop(getTop() + BIRD_SPEED * delta)
     timeSinceLastJump += delta
+}
+
+// gives us the top right, bottom, left to 
+// know if bird is still on the screen
+export function getBirdRect() {
+    return birdElem.getBoundingClientRect()
 }
 
 function setTop(top) {
