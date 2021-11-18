@@ -1,11 +1,17 @@
 const HOLE_HEIGHT = 120
-const pipes = []
+const PIPE_WIDTH = 120
+let pipes = []
 const PIPE_INTERVAL = 1500
 const PIPE_SPEED = 0.75
 let timeSinceLastPipe = 0
 
+export function setupPipes() {
+    document.documentElement.style.setProperty("--pipe-width", PIPE_WIDTH)
+    document.documentElement.style.setProperty("--hole-height", HOLE_HEIGHT)
+    timeSinceLastPipe = PIPE_INTERVAL
+}
 
-export function updatePipes() {
+export function updatePipes(delta) {
     timeSinceLastPipe += delta
 
     if (timeSinceLastPipe > PIPE_INTERVAL) {
@@ -14,6 +20,9 @@ export function updatePipes() {
     }
 
     pipes.forEach(pipe => {
+        if (pipe.left + PIPE_WIDTH < 0) {
+            return pipe.remove()
+        }
         pipe.left= pipe.left - delta * PIPE_SPEED
     })
 }
@@ -34,11 +43,15 @@ function createPipe() {
         },
         set left(value) {
             pipeElem.style.setProperty("--pipe-left", value)
+        },
+        remove() {
+            pipes = pipes.filter(p => p !== pipe)
+            pipeElem.remove()
         }
     }
     pipe.left = window.innerWidth
     document.body.append(pipeElem)
-    pipe.push(pipe)
+    pipes.push(pipe)
 }
 
 function createPipeSegment(position) {

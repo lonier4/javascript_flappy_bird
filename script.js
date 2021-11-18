@@ -1,5 +1,5 @@
 import {updateBird, setupBird, getBirdRect} from './bird.js';
-import {updatePipes} from './pipe.js';
+import {updatePipes, setupPipes} from './pipe.js';
 
 document.addEventListener("keypress", handleStart, { once: true })
 const title = document.querySelector("[data-title]")
@@ -33,6 +33,7 @@ function checkLose() {
 function handleStart() {
     title.classList.add("hide")
     setupBird()
+    setupPipes()
     lastTime = null // resets our lastTime so time doesnt
     // keep incrementing after the game ends
     window.requestAnimationFrame(updateLoop)
