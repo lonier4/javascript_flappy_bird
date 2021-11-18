@@ -5,13 +5,13 @@ let timeSinceLastJump = Number.POSITIVE_INFINITY
 
 export function setupBird() {
     setTop(window.innerHeight/2)
-    document.removeEventListener("keydown", handleJump)
-    domcument.addEventListener("keydown", handleJump)
+    document.removeEventListener('keydown', handleJump)
+    document.addEventListener('keydown', handleJump)
 }
 
 export function updateBird(delta) {
     if (timeSinceLastJump < JUMP_DURATION) {
-        setTop(getTop() + BIRD_SPEED * delta)
+        setTop(getTop() - BIRD_SPEED * delta)
     } else {
         setTop(getTop() + BIRD_SPEED * delta) 
     }
@@ -29,7 +29,8 @@ function setTop(top) {
 }
 
 function getTop() {
-    return parseFloat(getComputedStyle(birdElem).getPropertyValue("--bird-top"))
+    return parseFloat(getComputedStyle(birdElem).getPropertyValue
+    ("--bird-top"))
 }
 
 function handleJump(e) {
